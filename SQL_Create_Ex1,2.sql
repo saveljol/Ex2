@@ -22,7 +22,7 @@ INSERT INTO EMPLOYEE1 VALUES
 (2, 6, 'Molly H.','employee',65),
 (3, 6, 'Hurtick G.','cleaner',50);
 
---ЗАДАНИЕ 1
+--ZADANIE 1
 declare @i int
 set @i=(SELECT DISTINCT MIN(DEPARTMENT_ID) FROM [dbo].[Employee1]);
 WHILE @i <= (SELECT DISTINCT MAX(DEPARTMENT_ID) FROM [dbo].[Employee1]) 
@@ -32,7 +32,7 @@ WHILE @i <= (SELECT DISTINCT MAX(DEPARTMENT_ID) FROM [dbo].[Employee1])
 		SET @i=@i+1;
 	END
 
---ЗАДАНИЕ 2
+--ZADANIE 2
 Declare @tbl table (RowId int identity(1,1), CHIEF_ID int)
 
 DECLARE @CHIEF_ID int, 
@@ -49,7 +49,7 @@ WHILE @iRow <= @count
 		SELECT DISTINCT @CHIEF_ID = CHIEF_ID FROM @tbl WHERE RowId = @iRow 
 		declare @sal float
 		set @sal=(SELECT AVG(SALARY) FROM [dbo].[Employee1] WHERE CHIEF_ID=@CHIEF_ID AND ID!=CHIEF_ID); 
-		SELECT @sal AS 'Средняя З/П непосредственных подчиненных:'
+		SELECT @sal AS 'Average salary of subordinates:'
 
 		SELECT NAME, SALARY FROM [dbo].[Employee1]  WHERE SALARY>(2*@sal) AND ID=@CHIEF_ID
 			EXCEPT (SELECT NAME, SALARY FROM [dbo].[Employee1] WHERE ID not in (SELECT CHIEF_ID from [dbo].[Employee1]))
